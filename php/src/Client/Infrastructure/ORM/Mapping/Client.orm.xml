@@ -8,7 +8,7 @@
         <field name="firstname" column="firstname" length="80"/>
         <field name="lastname" column="lastname" length="80"/>
 
-        <many-to-many field="files" target-entity="App\Client\Domain\ClientFile">
+        <many-to-many field="files" target-entity="App\Client\Domain\ClientFile" index-by="id">
             <join-table name="client_file_relation">
                 <join-columns>
                     <join-column name="client_id" referenced-column-name="id"/>

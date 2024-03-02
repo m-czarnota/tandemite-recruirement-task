@@ -3,6 +3,7 @@
 namespace App\Client\Infrastructure\ORM;
 
 use App\Client\Domain\Client;
+use App\Client\Domain\ClientFile;
 use App\Client\Domain\ClientRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -30,5 +31,24 @@ class DoctrineClientRepository extends ServiceEntityRepository implements Client
         foreach ($client->getFiles() as $file) {
             $em->persist($file);
         }
+    }
+
+    public function findOneById(string $id): ?Client
+    {
+        return $this->find($id);
+    }
+
+    public function findPage(int $pageNumber, int $pageSize): array
+    {
+        return $this->createQueryBuilder('c')
+            ->setMaxResults($pageSize)
+            ->setFirstResult(($pageNumber - 1) * $pageSize)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findCount(): int
+    {
+        return $this->count();
     }
 }

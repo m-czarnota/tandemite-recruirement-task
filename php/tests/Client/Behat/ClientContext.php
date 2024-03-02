@@ -2,9 +2,15 @@
 
 namespace App\Tests\Client\Behat;
 
-use App\Tests\Common\TandemiteKernelBrowser;
+use App\Client\Domain\ClientFileNotValidException;
+use App\Client\Domain\ClientFilesCountExceededException;
+use App\Client\Domain\ClientNotValidException;
+use App\Client\Domain\ClientRepositoryInterface;
+use App\Tests\Client\Stub\ClientStub;
+use App\Tests\Common\Behat\TandemiteKernelBrowser;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
+use Behat\Step\Given;
 use Behat\Step\Then;
 use PHPUnit\Framework\Assert;
 
@@ -12,6 +18,7 @@ readonly class ClientContext implements Context
 {
     public function __construct(
         private TandemiteKernelBrowser $browser,
+        private ClientRepositoryInterface $clientRepository,
     ) {
     }
 
@@ -31,6 +38,25 @@ readonly class ClientContext implements Context
         $responseMessage = json_decode($response);
 
         Assert::assertEquals($message, $responseMessage);
+    }
+
+    /**
+     * @throws ClientFilesCountExceededException
+     * @throws ClientFileNotValidException
+     * @throws ClientNotValidException
+     */
+    #[Given('there exist a client like')]
+    public function thereExistAClientLike(PyStringNode $clientContent): void
+    {
+        $clientData = json_decode(trim($clientContent->getRaw()), true);
+
+        $existedClient = $this->clientRepository->findOneById($clientData['id'] ?? '');
+        if ($existedClient) {
+            return;
+        }
+
+        $client = ClientStub::createFromArrayData($clientData);
+        $this->clientRepository->add($client);
     }
 
     private function checkIfResponseLooksLikeDummyResponse(array $response, array $dummyResponse): void

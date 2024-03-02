@@ -3,7 +3,7 @@ default:
         default:
             paths:    [ features ]
             contexts:
-                - App\Tests\Common\CommonContext
+                - App\Tests\Common\Behat\CommonContext
                 - App\Tests\Client\Behat\ClientContext
 
     extensions:

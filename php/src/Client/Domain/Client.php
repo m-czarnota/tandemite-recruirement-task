@@ -13,6 +13,7 @@ class Client implements JsonSerializable
 
     public readonly string $id;
 
+    /** @var ArrayCollection<int, ClientFile> $files */
     private Collection $files;
 
     /**
@@ -38,6 +39,7 @@ class Client implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'id' => $this->id,
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
             'files' => array_map(fn(ClientFile $file) => $file->jsonSerialize(), $this->getFiles()),
@@ -65,6 +67,19 @@ class Client implements JsonSerializable
     public function getFiles(): array
     {
         return $this->files->toArray();
+    }
+
+    public function updateFile(ClientFile $clientFile): self
+    {
+        $file = $this->files->get($clientFile->id);
+        $file->update($clientFile);
+
+        return $this;
+    }
+
+    public function getFile(string $fileId): ?ClientFile
+    {
+        return $this->files->get($fileId);
     }
 
     private function validate(): array

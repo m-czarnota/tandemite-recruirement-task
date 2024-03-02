@@ -5,9 +5,9 @@ namespace App\Client\Domain;
 use JsonSerializable;
 use Ramsey\Uuid\Uuid;
 
-readonly class ClientFile implements JsonSerializable
+class ClientFile implements JsonSerializable
 {
-    public string $id;
+    public readonly string $id;
 
     /**
      * @param string|null $id
@@ -17,8 +17,8 @@ readonly class ClientFile implements JsonSerializable
      */
     public function __construct(
         ?string $id,
-        public string $name,
-        public string $path,
+        private string $name,
+        private string $path,
     ) {
         $this->id = $id ?? Uuid::uuid7();
 
@@ -35,6 +35,24 @@ readonly class ClientFile implements JsonSerializable
             'name' => $this->name,
             'path' => $this->path,
         ];
+    }
+
+    public function update(self $clientFile): self
+    {
+        $this->name = $clientFile->getName();
+        $this->path = $clientFile->getPath();
+
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
     }
 
     private function validate(): array

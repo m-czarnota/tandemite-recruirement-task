@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Common;
+namespace App\Tests\Common\Behat;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;

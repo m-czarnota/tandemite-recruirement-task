@@ -4,6 +4,7 @@ namespace App\Client\Application\AddClient;
 
 use App\Client\Application\AddClient\File\RequestToUploadedFilesDtoMapper;
 use App\Client\Application\AddClient\File\UploadedFilesDtoToClientFilesMapper;
+use App\Client\Application\AddClient\Response\ClientToResponseDtoMapper;
 use App\Client\Domain\AddClientService;
 use App\Client\Domain\ClientFileNotValidException;
 use App\Client\Domain\ClientFilesCountExceededException;
@@ -25,6 +26,7 @@ class AddClientController extends AbstractController
         private readonly UploadedFilesDtoToClientFilesMapper $uploadedFilesDtoToClientFilesMapper,
         private readonly EntityManagerInterface $entityManager,
         private readonly AddClientService $addClientService,
+        private readonly ClientToResponseDtoMapper $clientToResponseDtoMapper,
     ) {
     }
 
@@ -61,6 +63,6 @@ class AddClientController extends AbstractController
 
         $this->entityManager->flush();
 
-        return new JsonResponse($client, Response::HTTP_CREATED);
+        return new JsonResponse($this->clientToResponseDtoMapper->execute($client), Response::HTTP_CREATED);
     }
 }

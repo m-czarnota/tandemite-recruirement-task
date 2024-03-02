@@ -31,4 +31,18 @@ class ClientStub
 
         return $client;
     }
+
+    /**
+     * @param string|null $id
+     * @return Client
+     * @throws ClientNotValidException
+     */
+    public static function createExample(?string $id = null): Client
+    {
+        return new Client(
+            $id,
+            'Example',
+            'Client',
+        );
+    }
 }

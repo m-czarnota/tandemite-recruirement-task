@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Common;
+namespace App\Tests\Common\Behat;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -30,7 +30,7 @@ readonly class TandemiteKernelBrowser
 
         $files = array_map(
             function(array $fileData) {
-                $path = __DIR__ . $fileData['path'];
+                $path = __DIR__ . '/..' . $fileData['path'];
                 $name = $fileData['name'] ?? basename($path);
 
                 return new UploadedFile(
