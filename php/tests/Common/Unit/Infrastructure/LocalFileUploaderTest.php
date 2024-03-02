@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Common\Unit\Infrastructure;
 
 use App\Common\Domain\File\FileNotExistException;
@@ -21,10 +23,6 @@ class LocalFileUploaderTest extends TestCase
     }
 
     /**
-     * @param string $uploadLocalDir
-     * @param string $projectDir
-     * @param string $filePath
-     * @return void
      * @throws FileNotExistException
      *
      * @dataProvider executeDataProvider
@@ -59,12 +57,6 @@ class LocalFileUploaderTest extends TestCase
     }
 
     /**
-     * @param string $uploadLocalDir
-     * @param string $projectDir
-     * @param string $filePath
-     * @param string $exception
-     * @param string $exceptionMessage
-     * @return void
      * @throws FileNotExistException
      *
      * @dataProvider executeValidationsDataProvider
@@ -99,7 +91,7 @@ class LocalFileUploaderTest extends TestCase
                 'projectDir' => '/var/www/html',
                 'filePath' => 'non-existed-file',
                 'exception' => FileNotExistException::class,
-                'exceptionMessage' => "File `/var/www/html/non-existed-file` does not exist",
+                'exceptionMessage' => 'File `/var/www/html/non-existed-file` does not exist',
             ],
         ];
     }

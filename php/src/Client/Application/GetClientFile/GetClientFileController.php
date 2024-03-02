@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Client\Application\GetClientFile;
 
 use App\Client\Domain\ClientFileNotFoundException;
@@ -20,9 +22,6 @@ class GetClientFileController extends AbstractController
     }
 
     /**
-     * @param string $clientId
-     * @param string $fileId
-     * @return BinaryFileResponse
      * @throws ClientFileNotFoundException
      * @throws FileNotExistException
      */

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Client\Unit\Domain;
 
 use App\Client\Domain\FileValidator;
@@ -15,10 +17,6 @@ class FileValidatorTest extends TestCase
     }
 
     /**
-     * @param int $size
-     * @param string $mimeType
-     * @param array $exceptedErrors
-     * @return void
      * @dataProvider executeDataProvider
      */
     public function testExecute(int $size, string $mimeType, array $exceptedErrors): void

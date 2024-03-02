@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Client\Unit\Application\AddClient\File;
 
 use App\Client\Application\AddClient\File\UploadedFilesDtoToClientFilesMapper;
@@ -7,7 +9,6 @@ use App\Client\Domain\ClientFileNotValidException;
 use App\Client\Domain\FileValidator;
 use App\Tests\Client\Stub\UploadedFileDtoStub;
 use PHPUnit\Framework\TestCase;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 
 class UploadedFilesDtoToClientFilesMapperTest extends TestCase
 {
@@ -23,8 +24,6 @@ class UploadedFilesDtoToClientFilesMapperTest extends TestCase
     }
 
     /**
-     * @param array $uploadedFilesData
-     * @return void
      * @throws ClientFileNotValidException
      *
      * @dataProvider executeDataProvider
@@ -69,10 +68,6 @@ class UploadedFilesDtoToClientFilesMapperTest extends TestCase
     }
 
     /**
-     * @param array $uploadedFilesData
-     * @param string $exception
-     * @param string $exceptionMessage
-     * @return void
      * @throws ClientFileNotValidException
      *
      * @dataProvider executeValidationsDataProvider

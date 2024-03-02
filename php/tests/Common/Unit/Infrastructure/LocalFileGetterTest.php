@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Common\Unit\Infrastructure;
 
 use App\Common\Domain\File\FileNotExistException;
@@ -21,9 +23,6 @@ class LocalFileGetterTest extends TestCase
     }
 
     /**
-     * @param string $filePath
-     * @param string $projectDir
-     * @return void
      * @throws FileNotExistException
      *
      * @dataProvider executeDataProvider
@@ -54,10 +53,6 @@ class LocalFileGetterTest extends TestCase
     }
 
     /**
-     * @param string $filePath
-     * @param string $exception
-     * @param string $exceptionMessage
-     * @return void
      * @throws FileNotExistException
      *
      * @dataProvider executeValidationsDataProvider
@@ -76,7 +71,7 @@ class LocalFileGetterTest extends TestCase
             'non existed filepath' => [
                 'filePath' => 'non-existed-file',
                 'exception' => FileNotExistException::class,
-                'exceptionMessage' => "File `non-existed-file` not exist",
+                'exceptionMessage' => 'File `non-existed-file` not exist',
             ],
         ];
     }

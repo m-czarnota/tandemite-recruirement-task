@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Client\Unit\Domain;
 
 use App\Client\Domain\ClientNotValidException;
@@ -22,11 +24,6 @@ class ListClientServiceTest extends TestCase
     }
 
     /**
-     * @param int $totalRecords
-     * @param int $paginationPage
-     * @param int $paginationLimit
-     * @param int $exceptedRecordCount
-     * @return void
      * @throws ClientNotValidException
      *
      * @dataProvider executeDataProvider
@@ -36,20 +33,19 @@ class ListClientServiceTest extends TestCase
         int $paginationPage,
         int $paginationLimit,
         int $exceptedRecordCount,
-    ): void
-    {
+    ): void {
         // total records: 111, pagination limit: 20
         $totalPages = intval(ceil($totalRecords / $paginationLimit));
         if ($paginationPage < $totalPages) {
             $recordCountOnPage = $paginationLimit;
-        } else if ($paginationPage === $totalPages) {
+        } elseif ($paginationPage === $totalPages) {
             $recordCountOnPage = $totalRecords % $paginationLimit;
         } else {
             $recordCountOnPage = 0;
         }
 
         $exampleClients = [];
-        for ($i = 0; $i < $recordCountOnPage; $i++) {
+        for ($i = 0; $i < $recordCountOnPage; ++$i) {
             $exampleClients[] = ClientStub::createExample();
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Common\Infrastructure\File;
 
 use App\Common\Domain\File\FileNotExistException;
@@ -14,8 +16,6 @@ readonly class LocalFileUploader implements FileUploaderInterface
     }
 
     /**
-     * @param string $filePath
-     * @return string
      * @throws FileNotExistException
      */
     public function execute(string $filePath): string

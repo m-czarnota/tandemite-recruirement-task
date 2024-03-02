@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Client\Domain;
 
 use App\Common\Domain\File\FileGetterInterface;
@@ -14,9 +16,6 @@ readonly class GetClientFileService
     }
 
     /**
-     * @param string $clientId
-     * @param string $fileId
-     * @return ClientFileDataDto
      * @throws ClientFileNotFoundException
      * @throws FileNotExistException
      */

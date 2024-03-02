@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Client\Domain;
 
 class FileValidator
 {
     /**
-     * size in bytes
+     * size in bytes.
      */
-    const int MAX_SIZE = 2097152;
-    const string IMAGE_MIME_TYPE_PATTERN = 'image/';
+    public const int MAX_SIZE = 2097152;
+    public const string IMAGE_MIME_TYPE_PATTERN = 'image/';
 
     public function execute(int $size, string $mimeType): array
     {
@@ -20,7 +22,7 @@ class FileValidator
         }
 
         if (!str_starts_with($mimeType, self::IMAGE_MIME_TYPE_PATTERN)) {
-            $errors['mimeType'] = "File is not image";
+            $errors['mimeType'] = 'File is not image';
         }
 
         return $errors;

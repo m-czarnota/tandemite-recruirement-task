@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Common\Infrastructure\File;
 
 use App\Common\Domain\File\FileGetterInterface;
@@ -15,8 +17,6 @@ readonly class LocalFileGetter implements FileGetterInterface
     }
 
     /**
-     * @param string $filePath
-     * @return SplFileInfo
      * @throws FileNotExistException
      */
     public function execute(string $filePath): SplFileInfo

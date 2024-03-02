@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Common\Unit\Domain\Pagination;
 
 use App\Common\Domain\Pagination\PaginationListDataDto;
@@ -8,14 +10,6 @@ use PHPUnit\Framework\TestCase;
 class PaginationListDataDtoTest extends TestCase
 {
     /**
-     * @param int $totalRecords
-     * @param int $currentPage
-     * @param int $pageSize
-     * @param int $exceptedTotalPages
-     * @param int|null $exceptedNextPage
-     * @param int|null $exceptedPrevPage
-     * @return void
-     *
      * @dataProvider constructDataProvider
      */
     public function testConstruct(

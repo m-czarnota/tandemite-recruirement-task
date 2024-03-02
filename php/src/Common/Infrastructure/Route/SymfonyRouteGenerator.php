@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Common\Infrastructure\Route;
 
 use App\Common\Domain\Route\RouteGeneratorInterface;
@@ -12,7 +14,6 @@ readonly class SymfonyRouteGenerator implements RouteGeneratorInterface
         private UrlGeneratorInterface $urlGenerator,
     ) {
     }
-
 
     public function execute(string $routeName, RouteTypeEnum $routeTypeEnum, array $params = []): string
     {

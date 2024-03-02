@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Client\Application\ListClient;
 
 use App\Client\Domain\Client;
@@ -18,10 +20,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class ListClientController extends AbstractController
 {
     public function __construct(
-        private readonly RequestStack                       $requestStack,
-        private readonly ParameterBagInterface              $parameterBag,
-        private readonly ListClientService                  $service,
-        private readonly RouteGeneratorInterface            $routeGenerator,
+        private readonly RequestStack $requestStack,
+        private readonly ParameterBagInterface $parameterBag,
+        private readonly ListClientService $service,
+        private readonly RouteGeneratorInterface $routeGenerator,
         private readonly PaginationResponseCreatorInterface $paginationResponseCreator,
     ) {
     }
@@ -30,15 +32,15 @@ class ListClientController extends AbstractController
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        $paginationPage = $request->get('page', $this->parameterBag->get('pagination.default_page'));
-        $paginationLimit = $request->get('limit', $this->parameterBag->get('pagination.default_limit'));
+        $paginationPage = (int) $request->get('page', $this->parameterBag->get('pagination.default_page'));
+        $paginationLimit = (int) $request->get('limit', $this->parameterBag->get('pagination.default_limit'));
 
         $paginationListDataDto = $this->service->execute($paginationPage, $paginationLimit);
         $paginationListDataDto->records = array_map(function (Client $client) {
             $serializedClient = $client->jsonSerialize();
             $clientId = $client->id;
 
-            $serializedClient['files'] = array_map(function(array $clientFileSerialized) use ($clientId) {
+            $serializedClient['files'] = array_map(function (array $clientFileSerialized) use ($clientId) {
                 $routeParams = [
                     'clientId' => $clientId,
                     'fileId' => $clientFileSerialized['id'],

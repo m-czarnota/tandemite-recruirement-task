@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Client\Application\AddClient\File;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -21,7 +23,7 @@ readonly class RequestToUploadedFilesDtoMapper
         $fileBag = $request->files;
         $uploadedFiles = $fileBag->get('files', []);
 
-        return array_map(fn(UploadedFile $file) => new UploadedFileDto(
+        return array_map(fn (UploadedFile $file) => new UploadedFileDto(
             $file->getClientOriginalName(),
             mime_content_type($file->getRealPath()),
             $file->getSize(),

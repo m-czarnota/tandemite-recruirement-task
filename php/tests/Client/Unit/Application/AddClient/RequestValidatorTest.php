@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Client\Unit\Application\AddClient;
 
 use App\Client\Application\AddClient\RequestValidator;
@@ -21,9 +23,6 @@ class RequestValidatorTest extends TestCase
     }
 
     /**
-     * @param array $requestContent
-     * @param array $expectedErrors
-     * @return void
      * @dataProvider executeDataProvider
      */
     public function testExecute(array $requestContent, array $expectedErrors): void
@@ -32,7 +31,7 @@ class RequestValidatorTest extends TestCase
         $request
             ->method('get')
             ->willReturnMap(array_map(
-                fn(string $val, string $key) => [$key, null, $val],
+                fn (string $val, string $key) => [$key, null, $val],
                 $requestContent,
                 array_keys($requestContent)
             ));

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Client\Domain;
 
 use JsonSerializable;
@@ -10,9 +12,6 @@ class ClientFile implements JsonSerializable
     public readonly string $id;
 
     /**
-     * @param string|null $id
-     * @param string $name
-     * @param string $path
      * @throws ClientFileNotValidException
      */
     public function __construct(
@@ -20,7 +19,7 @@ class ClientFile implements JsonSerializable
         private string $name,
         private string $path,
     ) {
-        $this->id = $id ?? Uuid::uuid7();
+        $this->id = $id ?? Uuid::uuid7()->toString();
 
         $errors = $this->validate();
         if (!empty($errors)) {

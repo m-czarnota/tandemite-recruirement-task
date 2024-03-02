@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Client\Unit\Domain;
 
 use App\Client\Domain\Client;
@@ -14,6 +16,7 @@ class ClientTest extends TestCase
 {
     /**
      * @throws ClientNotValidException
+     *
      * @dataProvider constructValidationsDataProvider
      */
     public function testConstructValidations(array $clientData, string $exception, string $exceptionMessage): void
@@ -61,10 +64,6 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @param array $clientData
-     * @param array $clientFileDataToAdd
-     * @param int $exceptedFileCount
-     * @return void
      * @throws ClientNotValidException
      * @throws ClientFileNotValidException
      * @throws ClientFilesCountExceededException
@@ -101,11 +100,6 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @param array $clientData
-     * @param array $clientFileDataToAdd
-     * @param string $exception
-     * @param string $exceptionMessage
-     * @return void
      * @throws ClientFileNotValidException
      * @throws ClientFilesCountExceededException
      * @throws ClientNotValidException

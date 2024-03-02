@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Client\Unit\Domain;
 
 use App\Client\Domain\ClientFileNotFoundException;
@@ -32,11 +34,6 @@ class GetClientFileServiceTest extends TestCase
     }
 
     /**
-     * @param array $clientData
-     * @param string $clientId
-     * @param string $fileId
-     * @param string $exceptedOriginalFilename
-     * @return void
      * @throws ClientFileNotFoundException
      * @throws ClientFileNotValidException
      * @throws ClientFilesCountExceededException
@@ -50,7 +47,7 @@ class GetClientFileServiceTest extends TestCase
         $client = ClientStub::createFromArrayData($clientData);
         $this->clientRepository
             ->method('findOneById')
-            ->willReturnCallback(fn(string $param) => is_numeric($param) ? $client : null);
+            ->willReturnCallback(fn (string $param) => is_numeric($param) ? $client : null);
 
         $this->fileGetter
             ->method('execute')
@@ -84,12 +81,6 @@ class GetClientFileServiceTest extends TestCase
     }
 
     /**
-     * @param array $clientData
-     * @param string $clientId
-     * @param string $fileId
-     * @param string $exception
-     * @param string $exceptionMessage
-     * @return void
      * @throws ClientFileNotFoundException
      * @throws ClientFileNotValidException
      * @throws ClientFilesCountExceededException
@@ -108,7 +99,7 @@ class GetClientFileServiceTest extends TestCase
         $client = ClientStub::createFromArrayData($clientData);
         $this->clientRepository
             ->method('findOneById')
-            ->willReturnCallback(fn(string $param) => $client->id === $param ? $client : null);
+            ->willReturnCallback(fn (string $param) => $client->id === $param ? $client : null);
 
         self::expectException($exception);
         self::expectExceptionMessage($exceptionMessage);
@@ -135,7 +126,7 @@ class GetClientFileServiceTest extends TestCase
                 'clientId' => '234',
                 'fileId' => '1.1',
                 'exception' => ClientFileNotFoundException::class,
-                'exceptionMessage' => "Not found file `1.1` for client `234`",
+                'exceptionMessage' => 'Not found file `1.1` for client `234`',
             ],
             'client file not found' => [
                 'clientData' => [
@@ -153,7 +144,7 @@ class GetClientFileServiceTest extends TestCase
                 'clientId' => '1',
                 'fileId' => '1.231',
                 'exception' => ClientFileNotFoundException::class,
-                'exceptionMessage' => "Not found file `1.231` for client `1`",
+                'exceptionMessage' => 'Not found file `1.231` for client `1`',
             ],
         ];
     }

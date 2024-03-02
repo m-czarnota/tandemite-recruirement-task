@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Common\Domain\Pagination;
 
 class PaginationListDataDto
@@ -12,7 +14,7 @@ class PaginationListDataDto
         int $currentPage,
         int $pageSize,
     ) {
-        $totalPages = ceil($totalRecords / $pageSize);
+        $totalPages = intval(ceil($totalRecords / $pageSize));
 
         $previousPage = $currentPage > 1 ? $currentPage - 1 : null;
         if ($previousPage !== null && $previousPage > $totalPages) {

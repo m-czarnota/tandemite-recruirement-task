@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Client\Stub;
 
 use App\Client\Domain\Client;
@@ -10,8 +12,6 @@ use App\Client\Domain\ClientNotValidException;
 class ClientStub
 {
     /**
-     * @param array $clientData
-     * @return Client
      * @throws ClientFileNotValidException
      * @throws ClientFilesCountExceededException
      * @throws ClientNotValidException
@@ -33,8 +33,6 @@ class ClientStub
     }
 
     /**
-     * @param string|null $id
-     * @return Client
      * @throws ClientNotValidException
      */
     public static function createExample(?string $id = null): Client

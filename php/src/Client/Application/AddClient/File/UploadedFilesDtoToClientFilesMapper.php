@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Client\Application\AddClient\File;
 
-use App\Client\Domain\Client;
 use App\Client\Domain\ClientFile;
 use App\Client\Domain\ClientFileNotValidException;
-use App\Client\Domain\ClientFilesCountExceededException;
 use App\Client\Domain\FileValidator;
 
 readonly class UploadedFilesDtoToClientFilesMapper
@@ -17,6 +17,7 @@ readonly class UploadedFilesDtoToClientFilesMapper
 
     /**
      * @return array<int, ClientFile>
+     *
      * @throws ClientFileNotValidException
      */
     public function execute(UploadedFileDto ...$uploadedFilesDto): array

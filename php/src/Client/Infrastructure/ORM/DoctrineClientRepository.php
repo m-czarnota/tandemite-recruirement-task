@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Client\Infrastructure\ORM;
 
 use App\Client\Domain\Client;
-use App\Client\Domain\ClientFile;
 use App\Client\Domain\ClientRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Common\Behat;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -29,7 +31,7 @@ readonly class TandemiteKernelBrowser
         $decodedContent = json_decode($content, true);
 
         $files = array_map(
-            function(array $fileData) {
+            function (array $fileData) {
                 $path = __DIR__ . '/..' . $fileData['path'];
                 $name = $fileData['name'] ?? basename($path);
 

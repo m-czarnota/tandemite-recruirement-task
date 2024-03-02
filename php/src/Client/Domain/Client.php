@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Client\Domain;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,17 +11,14 @@ use Ramsey\Uuid\Uuid;
 
 class Client implements JsonSerializable
 {
-    const int ALLOWED_FILES_COUNT = 1;
+    public const int ALLOWED_FILES_COUNT = 1;
 
     public readonly string $id;
 
-    /** @var ArrayCollection<int, ClientFile> $files */
+    /** @var ArrayCollection<int, ClientFile> */
     private Collection $files;
 
     /**
-     * @param string|null $id
-     * @param string $firstname
-     * @param string $lastname
      * @throws ClientNotValidException
      */
     public function __construct(
@@ -27,7 +26,7 @@ class Client implements JsonSerializable
         public readonly string $firstname,
         public readonly string $lastname,
     ) {
-        $this->id = $id ?? Uuid::uuid7();
+        $this->id = $id ?? Uuid::uuid7()->toString();
         $this->files = new ArrayCollection();
 
         $errors = $this->validate();
@@ -42,7 +41,7 @@ class Client implements JsonSerializable
             'id' => $this->id,
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
-            'files' => array_map(fn(ClientFile $file) => $file->jsonSerialize(), $this->getFiles()),
+            'files' => array_map(fn (ClientFile $file) => $file->jsonSerialize(), $this->getFiles()),
         ];
     }
 
