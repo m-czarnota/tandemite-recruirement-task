@@ -41,11 +41,13 @@ Feature: Add client controller tests
     Then the response with code "406" should be received
     And the response should looks like
     """
-    [
-      {
-        "size": "File is too large, allowed size: `2097152`, current size: `2623681`"
-      }
-    ]
+    {
+      "files": [
+        {
+          "size": "File is too large, allowed size: `2097152`, current size: `2623681`"
+        }
+      ]
+    }
     """
 
   Scenario: User tries to add a client with non image file and he gets not acceptable code in response with errors
@@ -64,11 +66,13 @@ Feature: Add client controller tests
     Then the response with code "406" should be received
     And the response should looks like
     """
-    [
-      {
-        "mimeType": "File is not image"
-      }
-    ]
+    {
+      "files": [
+        {
+          "mimeType": "File is not image"
+        }
+      ]
+    }
     """
 
   Scenario: User tries to add a client with 2 images and he gets not acceptable code in response with error
@@ -88,7 +92,12 @@ Feature: Add client controller tests
     }
     """
     Then the response with code "406" should be received
-    And the response should contains message "Client cannot have more than 1 files"
+    And the response should looks like
+    """
+    {
+      "generalError": "Client cannot have more than 1 files"
+    }
+    """
     
   Scenario: Users tries to add a client with empty response content and he gets bad request code in response with errors
     When I open "POST" page "/api/v1/clients"

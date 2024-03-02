@@ -64,6 +64,10 @@
     @apply flex-row;
   }
 
+  form .form-input-error {
+    @apply text-sm font-semibold text-red-700 ml-2;
+  }
+
   nav hr {
     @apply my-3 rounded;
   }

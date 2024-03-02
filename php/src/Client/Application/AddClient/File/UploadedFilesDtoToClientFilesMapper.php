@@ -56,7 +56,7 @@ readonly class UploadedFilesDtoToClientFilesMapper
         }
 
         if ($isError) {
-            throw new ClientFileNotValidException(json_encode($errors));
+            throw new ClientFileNotValidException(json_encode(['files' => $errors]));
         }
 
         return $files;

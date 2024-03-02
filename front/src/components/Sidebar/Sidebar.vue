@@ -28,8 +28,8 @@ provide('collapsed', collapsed);
             <hr class="rounded my-2">
 
             <div class="*:py-1.5 gap-2 flex flex-col">
-                <SidebarLink :to="RouteGenerator.generateRoute('addClient')" icon="fa-solid fa-house" name="Add client"/>
-                <!-- <SidebarLink :to="RouteGenerator.generateRoute('list-clients')" icon="fa-solid fa-receipt" name="List of clients"/> -->
+                <SidebarLink :to="RouteGenerator.generateRoute('addClient')" icon="fa-solid fa-user-plus" name="Add client"/>
+                <SidebarLink :to="RouteGenerator.generateRoute('listClients')" icon="fa-solid fa-users" name="List of clients"/>
             </div>
         </div>
 

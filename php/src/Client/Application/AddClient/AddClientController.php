@@ -58,7 +58,7 @@ class AddClientController extends AbstractController
                 $client->addFile($file);
             }
         } catch (ClientFilesCountExceededException $exception) {
-            return new JsonResponse($exception->getMessage(), Response::HTTP_NOT_ACCEPTABLE);
+            return new JsonResponse(['generalError' => $exception->getMessage()], Response::HTTP_NOT_ACCEPTABLE);
         }
 
         $client = $this->addClientService->execute($client);

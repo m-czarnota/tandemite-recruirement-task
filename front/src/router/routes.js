@@ -6,9 +6,13 @@ const routes = {
         },
     },
     addClient: {
-        path: '/add-client',
+        path: '/clients/add',
         component: () => import('../views/AddClientView.vue'),
     },
+    listClients: {
+        path: '/clients/list',
+        component: () => import('../views/ListClientsView.vue')
+    }
 };
 
 export default routes;

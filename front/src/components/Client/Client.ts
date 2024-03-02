@@ -4,4 +4,9 @@ export class Client {
         public lastname: String = '',
     ) {
     }
+
+    public reset() {
+        this.firstname = '';
+        this.lastname = '';
+    }
 }
