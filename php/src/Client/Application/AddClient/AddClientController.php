@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route(methods: Request::METHOD_POST)]
+#[Route('/clients', methods: Request::METHOD_POST)]
 class AddClientController extends AbstractController
 {
     public function __construct(

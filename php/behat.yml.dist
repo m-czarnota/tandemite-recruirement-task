@@ -5,6 +5,7 @@ default:
             contexts:
                 - App\Tests\Common\Behat\CommonContext
                 - App\Tests\Client\Behat\ClientContext
+                - App\Tests\User\Behat\LoggedUserContext
 
     extensions:
         FriendsOfBehat\SymfonyExtension:

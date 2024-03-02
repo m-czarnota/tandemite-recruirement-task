@@ -9,6 +9,8 @@ parameters:
     server.website_url: '%env(SERVER_WEBSITE_URL)%'
     pagination.default_page: '%env(PAGINATION_DEFAULT_PAGE)%'
     pagination.default_limit: '%env(PAGINATION_DEFAULT_LIMIT)%'
+    user.default.email: '%env(USER_DEFAULT_EMAIL)%'
+    user.default.password: '%env(USER_DEFAULT_PASSWORD)%'
 
 services:
     # default configuration for services in *this* file
@@ -33,7 +35,8 @@ services:
 
     App\Common\Domain\File\FileUploaderInterface: '@App\Common\Infrastructure\File\LocalFileUploader'
     App\Common\Domain\File\FileGetterInterface: '@App\Common\Infrastructure\File\LocalFileGetter'
-
     App\Common\Domain\Route\RouteGeneratorInterface: '@App\Common\Infrastructure\Route\SymfonyRouteGenerator'
-
     App\Common\Domain\Pagination\PaginationResponseCreatorInterface: '@App\Common\Infrastructure\Pagination\SymfonyPaginationResponseCreator'
+
+    App\User\Domain\UserRepositoryInterface: '@App\User\Infrastructure\ORM\DoctrineUserRepository'
+    App\User\Domain\UserPasswordHasherInterface: '@App\User\Infrastructure\SymfonyUserPasswordHasher'

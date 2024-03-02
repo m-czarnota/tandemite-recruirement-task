@@ -2,7 +2,7 @@
 import { reactive } from 'vue';
 import { ApiRouteGenerator } from './../../http-client/ApiRouteGenerator';
 
-const resourceUrl = `${ApiRouteGenerator.generatePath('clients', true)}?page=1&limit=10`;
+const resourceUrl = `${ApiRouteGenerator.generatePath('/clients', true)}?page=1&limit=10`;
 const response = await fetch(resourceUrl, {
     method: "GET",
 });

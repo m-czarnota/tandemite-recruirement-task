@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/{clientId}/files/{fileId}', name: 'api:v1:get_client_file', requirements: ['clientId' => '\S+', 'fileId' => '\S+'], methods: Request::METHOD_GET)]
+#[Route('/user/clients/{clientId}/files/{fileId}', name: 'api:v1:get_client_file', requirements: ['clientId' => '\S+', 'fileId' => '\S+'], methods: Request::METHOD_GET)]
 class GetClientFileController extends AbstractController
 {
     public function __construct(

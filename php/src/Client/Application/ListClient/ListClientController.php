@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route(name: 'api:v1:clients:list', methods: Request::METHOD_GET)]
+#[Route('/user/clients', name: 'api:v1:clients:list', methods: Request::METHOD_GET)]
 class ListClientController extends AbstractController
 {
     public function __construct(

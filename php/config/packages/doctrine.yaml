@@ -18,6 +18,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Client/Infrastructure/ORM/Mapping'
                 prefix: 'App\Client\Domain'
                 alias: Client
+            User:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/User/Infrastructure/ORM/Mapping'
+                prefix: 'App\User\Domain'
+                alias: User
 
 when@prod:
     doctrine:
