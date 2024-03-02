@@ -1,7 +1,8 @@
 <script setup>
 import SidebarLink from './SidebarLink.vue';
-import { ref, computed, provide } from 'vue';
+import { ref, computed, provide, reactive } from 'vue';
 import { RouteGenerator } from '../../router/RouteGenerator';
+import { Guard } from './../../Authenticator/Guard';
 
 const collapsed = ref(false);
 const toggleSidebar = () => (collapsed.value = !collapsed.value);
@@ -12,11 +13,14 @@ const sidebarWidth = computed(
   () => `${collapsed.value ? SIDEBAR_WIDTH_COLLAPSED : SIDEBAR_WIDTH}px`
 );
 
+const apiToken = ref(Guard.getToken());
+setInterval(() => apiToken.value = Guard.getToken(), 100);
+
 provide('collapsed', collapsed);
 </script>
 
 <template>
-    <nav class="p-3 bg-zinc-800 text-white h-dvh transition-all duration-300 flex flex-col justify-between" :style="{ width: sidebarWidth }">
+    <nav class="p-3 bg-zinc-800 text-white min-h-dvh transition-all duration-300 flex flex-col justify-between" :style="{ width: sidebarWidth }">
         <div>
             <h1 class="text-center">
                 <span class="*:block" v-if="collapsed">
@@ -30,6 +34,7 @@ provide('collapsed', collapsed);
             <div class="*:py-1.5 gap-2 flex flex-col">
                 <SidebarLink :to="RouteGenerator.generateRoute('addClient')" icon="fa-solid fa-user-plus" name="Add client"/>
                 <SidebarLink :to="RouteGenerator.generateRoute('listClients')" icon="fa-solid fa-users" name="List of clients"/>
+                <SidebarLink v-if="apiToken" :to="RouteGenerator.generateRoute('logout')" icon="fa-solid fa-right-from-bracket" name="Logout"/>
             </div>
         </div>
 

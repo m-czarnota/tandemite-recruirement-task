@@ -26,7 +26,7 @@ const sendForm = async () => {
         formData.append('files[]', file);
     }
 
-    const resourceUrl = ApiRouteGenerator.generatePath('clients');
+    const resourceUrl = ApiRouteGenerator.generatePath('/clients');
     const response = await fetch(resourceUrl, {
         method: "POST",
         body: formData,

@@ -12,6 +12,9 @@ readonly class SymfonyPaginationResponseCreator implements PaginationResponseCre
 {
     public function execute(PaginationListDataDto $paginationListData, string $route): PaginationResponseInterface
     {
-        return new SymfonyPaginationResponse($paginationListData);
+        $response = new SymfonyPaginationResponse($paginationListData);
+        $response->headers->add(['Access-Control-Allow-Origin' => '*']);
+
+        return $response;
     }
 }

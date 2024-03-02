@@ -1,10 +1,15 @@
 <script setup>
 import { reactive } from 'vue';
 import { ApiRouteGenerator } from './../../http-client/ApiRouteGenerator';
+import { Guard } from './../../Authenticator/Guard';
 
-const resourceUrl = `${ApiRouteGenerator.generatePath('/clients', true)}?page=1&limit=10`;
+const resourceUrl = `${ApiRouteGenerator.generatePath('/clients', true, true)}?page=1&limit=10`;
 const response = await fetch(resourceUrl, {
     method: "GET",
+    headers: {
+        'Authorization': `Bearer ${Guard.getToken()}`,
+        'Access-Control-Allow-Origin': '*',
+    },
 });
 
 const isResponseOk = reactive(response.ok);
