@@ -8,9 +8,20 @@ const response = await fetch(resourceUrl, {
     method: "GET",
     headers: {
         'Authorization': `Bearer ${Guard.getToken()}`,
-        'Access-Control-Allow-Origin': '*',
     },
 });
+
+const downloadImage = async (path) => {
+    const response = await fetch(path, {
+        method: "GET",
+        headers: {
+            'Authorization': `Bearer ${Guard.getToken()}`,
+        },
+    });
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+};
 
 const isResponseOk = reactive(response.ok);
 const data = await response.json();
@@ -26,7 +37,7 @@ const data = await response.json();
                 <hr class="my-2 border-slate-400">
                 <p>Files:</p>
                 
-                <a v-for="file in clientData.files" :href="file.path" target="_blank" class="pl-3 text-blue-700 hover:underline">
+                <a v-for="file in clientData.files" @click="downloadImage(file.path)" class="pl-3 text-blue-700 hover:underline">
                     <font-awesome-icon icon="fa-solid fa-file" />
                     {{ file.name }}
                 </a>
