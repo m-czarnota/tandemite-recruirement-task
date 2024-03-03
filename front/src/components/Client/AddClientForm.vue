@@ -16,6 +16,8 @@ const fileErrors = ref([]);
 const successInfo = ref(null);
 
 const sendForm = async () => {
+    errors.value = {};
+    fileErrors.value = [];
     successInfo.value = null;
 
     const formData = new FormData();
@@ -27,35 +29,30 @@ const sendForm = async () => {
     }
 
     const resourceUrl = ApiRouteGenerator.generatePath('/clients');
-    const response = await fetch(resourceUrl, {
-        method: "POST",
-        body: formData,
-    });
-    console.log(response.ok);
 
-    if (response.ok) {
-        successInfo.value = "Successfully added a client";
-        form.value.reset();
-        client.reset();
+    try {
+        const response = await fetch(resourceUrl, {
+            method: "POST",
+            body: formData,
+        });
 
-        return;
-    }
+        if (response.ok) {
+            successInfo.value = "Successfully added a client";
+            form.value.reset();
+            client.reset();
 
-    
-    if (response.status === 413) {
-        console.log('tutaj')
-        fileErrors.value = {
-            'size': 'Image is too large, allowed size: 2 MB',
+            return;
+        }
+
+        const reponseErrors = await response.json();
+
+        errors.value = reponseErrors;
+        fileErrors.value = reponseErrors.files?.length ? reponseErrors.files[0] : [];
+    } catch(tooLargeEntityError) {
+        errors.value = {
+            'generalError': 'Server error. Probably the uploaded files have too large a total size',
         };
-
-        return;
     }
-
-    const reponseErrors = await response.json();
-    console.log(reponseErrors)
-
-    errors.value = reponseErrors;
-    fileErrors.value = reponseErrors.files?.length ? reponseErrors.files[0] : [];
 };
 </script>
 
@@ -65,7 +62,7 @@ const sendForm = async () => {
             {{ successInfo }}
         </div>
 
-        <div v-if="errors.generalError">
+        <div v-if="errors.generalError" class="p-3 mb-3 shadow-sm shadow-red-700 rounded text-red-600">
             {{ errors.generalError }}
         </div>
 

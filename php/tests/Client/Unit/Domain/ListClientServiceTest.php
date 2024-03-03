@@ -34,7 +34,6 @@ class ListClientServiceTest extends TestCase
         int $paginationLimit,
         int $exceptedRecordCount,
     ): void {
-        // total records: 111, pagination limit: 20
         $totalPages = intval(ceil($totalRecords / $paginationLimit));
         if ($paginationPage < $totalPages) {
             $recordCountOnPage = $paginationLimit;

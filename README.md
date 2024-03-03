@@ -4,7 +4,7 @@
 1) `docker compose up -d`
 2) in php container run below commands:
 * `composer dsu`
-* `php bin/console lexik:jwt:generate-keypair --override`
+* `php bin/console lexik:jwt:generate-keypair --overwrite`
 * `php bin/console tandemite:user:create_first`
 3) open `localhost:80` in browser
 4) when you go to list of clients you will have to sign in. credentials are defined in `php/.env`
@@ -12,7 +12,7 @@
 * password: abc123
 
 ## TODO
-* handle not found for not existing client file as simple template
+* add OpenAPI
 * add pagination component to list of clients on front-end
 * add writing to and reading from cache for list of client on back-end
 

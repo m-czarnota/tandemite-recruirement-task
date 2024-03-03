@@ -11,6 +11,7 @@ use App\User\Domain\UserRepositoryInterface;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Behat\Step\When;
+use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 class LoggedUserContext implements Context
@@ -22,6 +23,7 @@ class LoggedUserContext implements Context
         private readonly JWTTokenManagerInterface $JWTTokenManager,
         private readonly UserPasswordHasherInterface $userPasswordHasher,
         private readonly UserRepositoryInterface $userRepository,
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -35,6 +37,8 @@ class LoggedUserContext implements Context
             $user->setPassword($this->userPasswordHasher->hash($user, $password));
             $this->userRepository->add($user);
         }
+
+        $this->entityManager->flush();
 
         $this->jwtToken = $this->JWTTokenManager->create($existedUser ?? $user);
     }
